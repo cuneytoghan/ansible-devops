@@ -1,0 +1,39 @@
+#1. package install httpd
+- hosts: all
+  tasks:
+  - name: install Apache 
+    package:
+      name: "{{ package }}"
+      state: latest
+
+  #2. Systemctl start/enable http
+  - name: Start apache  
+    service:
+      name: "{{ package }}"
+      state: started
+      enabled: yes
+  #3. Yum install wget unzip -y
+  - name: install wget and unzip 
+    package:
+      name: "{{ packages }}"
+    vars:
+      packages:
+      - wget
+      - unzip
+
+  #4. Wget  https://www.free-css.com/assets/files/free-css-templates/download/page286/plot-listing.zip
+
+    
+  #5. Unzip templatemo_564_plot_listing
+  - name: download and extract Template  
+    unarchive:
+      src: https://www.free-css.com/assets/files/free-css-templates/download/page286/plot-listing.zip
+      dest: /tmp/
+      remote_src: yes
+  #6. Cp -r templatemo_564_plot_listing/*   on RedHad
+
+  - name: Copy file to var folder
+    copy:
+      src: /tmp/templatemo_564_plot_listing/
+      remote_src: yes 
+      dest: /var/www/html/

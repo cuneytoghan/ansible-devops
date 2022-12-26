@@ -1,0 +1,37 @@
+  #1. yum install httpd
+
+- name: install  Apache on Debian
+  apt:
+    name: apache2
+    state: latest
+
+    #2. Systemctl start/enable httpd
+- name: start apache on Debian
+  service:
+    name: apache2
+    state: started
+    enabled: yes
+
+    #3. Yum install wget unzip -y
+- name: install wget and unzip on Debian
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - wget
+    - unzip
+
+    #5. Unzip templatemo_564_plot_listing
+- name: download and extract Template on Debian
+  unarchive:
+    src: https://www.free-css.com/assets/files/free-css-templates/download/page286/plot-listing.zip
+    dest: /tmp/
+    remote_src: yes
+
+    #6. Cp -r templatemo_564_plot_listing/*   /var/www/html/
+
+- name: Copy file to var folder on Debian
+  copy:
+    src: /tmp/templatemo_564_plot_listing/
+    remote_src: yes 
+    dest: /var/www/html/
