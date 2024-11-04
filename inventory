@@ -1,3 +1,4 @@
-98.80.66.189
-54.242.128.249
+98.80.66.189     apache_package=apache2 php_package=libapache2-mod-php
+54.242.128.249   apache_package=apache2 php_package=libapache2-mod-php
+
 
