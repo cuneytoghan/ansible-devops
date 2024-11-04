@@ -4,20 +4,10 @@
   become: true
   tasks:
 
-  - name: install apache2 package
-    apt:
+  - name: install apache  and php
+    ansible.builtin.package:
       name:
-        - apache2
-        - libapache2-mod-php
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
       state: latest
       update_cache: yes
-    when: ansible_distribution == "ubuntu"
-
-  - name: install apache and php  package for CentOS
-    dnf:
-      name:
-        - httpd
-        - php
-      state: latest
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
