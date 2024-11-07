@@ -1,4 +1,4 @@
-[web_revers]
+[web_servers]
 98.80.66.189     apache_package=apache2 php_package=libapache2-mod-php
 
 [db_servers]
