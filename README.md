@@ -1,3 +1,2 @@
-#Ansible-devops
-
-Ansible playbooks
+# Ansible-devops
+This repo is about configuring ansible for DevOps.
