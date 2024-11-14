@@ -4,4 +4,6 @@
 [db_servers]
 54.242.128.249   apache_package=apache2 php_package=libapache2-mod-php
 
-
+[test_servers]
+35.170.192.98 ansible_user=ubuntu ansible_ssh_private_key_file=~/Downloads/ansible-devops-keypair.pem ansible_python_interpreter=/usr/bin/python3.12
+44.212.56.201 ansible_user=ubuntu ansible_ssh_private_key_file=~/Downloads/ansible-devops-keypair.pem ansible_python_interpreter=/usr/bin/python3.12
