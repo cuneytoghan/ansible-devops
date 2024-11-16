@@ -1,5 +1,6 @@
 
 ### SSH Key Setup for Remote Access
+Recommanded!
 This command copies a public SSH key to a remote server, enabling passwordless login:
 
 ```
