@@ -1,10 +1,26 @@
 # Ansible-devops
-This repo is about configuring ansible for DevOps.
 
-### Install Role Dependencies
+## Description
+This project is about configuring ansible for DevOps.
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+
+## Features
+- Automates tasks with Ansible
+- Installs required software
+
+## Installation
+1. Install Role Dependencies
+```bash
 mkdir roles && ansible-galaxy install -r required_roles.yaml -p roles/
+```
 
-### a. Setup Python venv
+## Usage
+1. Setup Python venv
 
 ```bash
 cd ansible-devops; \
@@ -12,7 +28,7 @@ python3 -m venv venv; \
 source venv/bin/activate; \
 pip install -r requirements.txt
 ```
-### then to exit 
-```
+To exit 
+```bash
 deactivate
 ```
