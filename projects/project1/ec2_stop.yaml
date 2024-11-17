@@ -1,0 +1,18 @@
+
+---
+
+- name: Stop EC2 instance
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Stop the EC2 instance
+      amazon.aws.ec2_instance:
+        state: stopped
+        instance_ids:
+          - i-0e1b052086a00b876  # Replace with your actual instance ID (manageed-node-1)
+          - i-0d9b33eb23ead7670  # Replace with your actual instance ID (manageed-node-2) 
+          - i-0a838d882a120d5eb  # Replace with your actual instance ID (manageed-node-3)
+        region: us-east-1        # Replace with your AWS region
+        aws_access_key: "{{ aws_access_key}}"
+        aws_secret_key: "{{ aws_secret_key }}"

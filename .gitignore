@@ -1,3 +1,4 @@
 workstation
 roles/
 vault.pass
+venv/

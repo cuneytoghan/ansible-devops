@@ -1,0 +1,24 @@
+---
+### This play is used to terminate an EC2 instance.
+- name: terminate ec2 instances
+  hosts: localhost
+  connection: local
+  tasks:
+  - name: terminate ec2 instances
+    amazon.aws.ec2_instance:
+      instance_ids:
+        - i-0d9b33eb23ead7670  # Replace with your actual instance ID (manageed-node-3)
+      state: absent
+      region: us-east-1
+      aws_access_key: "{{aws_access_key}}"  # From vault as defined
+      aws_secret_key: "{{aws_secret_key}}"  # From vault as defined
+
+---
+# Terminate the EC2 instance w/ command module and when conditional statement 
+# - name: Terminate ec2 instances
+#   hosts: web_servers
+#   tasks:
+#     - name: Terminating the ec2 instance
+#       ansible.builtin.command:
+#       when:
+#         - ansible_distribution == 'ubuntu'
