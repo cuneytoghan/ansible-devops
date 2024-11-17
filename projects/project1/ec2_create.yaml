@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  connection: local
+  tasks:
+  - name: create ec2 instances
+    amazon.aws.ec2_instance:
+      name: "{{ item.name }}"
+      key_name: "ansible-devops-keypair.pem"
+      instance_type: t2.micro
+      security_group: default
+      region: us-east-1
+      aws_access_key: "{{ec2_access_key}}"  # From vault as defined
+      aws_secret_key: "{{ec2_secret_key}}"  # From vault as defined      
+      network:
+        assign_public_ip: true
+      image_id: "{{ item.image }}"
+
+    loop:
+      - { image: "ami-012967cc5a8c9f891", name: "my-instance-1" } # Amazon Linux 2 AMI (HVM), SSD Volume Type ami-0866a3c8686eaeeba
+      - { image: "ami-0866a3c8686eaeeba", name: "my-instance-2" } # ubuntu images
+      - { image: "ami-0866a3c8686eaeeba", name: "my-instance-3" } # ubuntu images
