@@ -1,21 +1,55 @@
-### Generate a password for ansible vault
+# Project Name
+
+## Description
+This project automates the deployment of EC2 instances using Ansible playbooks.
+
+## Table of Contents
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Authentication](#Authentication)
+- [Examples](#examples)
+
+
+## Features
+- Automates EC2 instance creation
+- Automate stop/start selected ec2 instances
+- Installs required software
+
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/cuneytoghan/ansible-devops.git
+
+
+## Usage
+1. Generate a password for ansible vault
 ```bash
 openssl rand -base64 2048 > vault.pass 
 ```
 
-### Create an encrypted file using Ansible Vault,
+2. Create an encrypted file using Ansible Vault, 
 
+```bash
+ansible-vault create <path/to/encryptedfile> --vault-password-file vault.pass 
 ```
- ansible-vault create group_vars/all/pass.yml --vault-password-file vault.pass 
+
+3. Create an encrypted file using Ansible Vault, 
+
+```bash
+cd projects/project1
+ansible-vault edit <path/to/encryptedfile>  --vault-password-file vault.pass 
 ```
-### Create ec2 instance 
-```
+
+4. Create ec2 instance 
+```bash
 touch ec2_create.yaml
 ```
-then add block of code in ec2_create.yaml
-```
+Then add block of code in ec2_create.yaml
+```yaml
 ---
-- hosts: localhost
+- name: Create ec2 instance
+  hosts: localhost
   connection: local
   tasks:
   - name: create ec2 instances
@@ -31,4 +65,36 @@ then add block of code in ec2_create.yaml
         assign_public_ip: true
       image_id: ami-04b70fa74e45c3917
 
-      ```
+```
+
+## Authentication
+1. Setup passwordless authentication:
+
+- This command will copy your laptop/server's public SSH key to the server's ~/.ssh/authorized_keys file.
+```bash
+ssh-copy-id -f "-o IdentityFile <PATH/TO/PEMFILE>" ubuntu@< SERVER-IP-ADRESS >
+```
+- To ssh into server with keypair:
+```bash
+ssh -o ' IdentityFile PATH/TO/KEYPAIR' 'ubuntu@<IP-address>' 
+```
+
+## Examples
+
+1. To run playbooks and create/stop/start/terminate ec2 instances: 
+```bash
+cd projects/project
+
+ansible-playbook  -i inventory.ini  ec2_create.yaml --vault-pass-file vault.pass   
+
+ansible-playbook  -i inventory.ini  ec2_stop.yaml --vault-pass-file vault.pass  
+
+ansible-playbook  -i inventory.ini  ec2_start.yaml --vault-pass-file vault.pass   
+
+ansible-playbook  -i inventory.ini  ec2_terminate.yaml --vault-pass-file vault.pass   
+```
+
+
+
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+
