@@ -16,6 +16,5 @@
       image_id: "{{ item.image }}"
 
     loop:
-      - { image: "ami-012967cc5a8c9f891", name: "my-instance-1" } # Amazon Linux 2 AMI (HVM), SSD Volume Type ami-0866a3c8686eaeeba
       - { image: "ami-0866a3c8686eaeeba", name: "my-instance-2" } # ubuntu images
       - { image: "ami-0866a3c8686eaeeba", name: "my-instance-3" } # ubuntu images
