@@ -1,0 +1,23 @@
+---
+- name: Error handling
+  hosts: test_servers
+  become: yes
+  tasks:
+    - name: make sure openssh and openssl are installed
+      package:
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - openssh
+        - openssl
+      ignore_errors: yes
+    - name: verify if docker is installed
+      ansible.builtin.command: docker --version
+      register: output
+      ignore_errors: yes
+    - name: install docker
+      ansible.builtin.apt:
+        name: docker.io
+        state: present
+      when: 
+        output.failed
