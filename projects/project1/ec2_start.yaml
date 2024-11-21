@@ -1,4 +1,16 @@
 ---
+# - name: start rds instance
+#   hosts: localhost
+#   gather_facts: false
+#   connection: local
+#   tasks:
+#     - name: start the rds instance
+#       amazon.aws.rds_instance:
+#         state: started
+#         db_instance_identifier: database-1
+#         region: us-east-1
+#         aws_access_key: "{{ aws_access_key }}"
+#         aws_secret_key: "{{ aws_secret_key }}"
 - name: Start EC2 instance
   hosts: localhost
   gather_facts: false
