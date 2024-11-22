@@ -19,7 +19,7 @@
     when: ansible_distribution == "Ubuntu"
 
  
-- hosts: web_servers
+- hosts: test_servers
   become: true
   tasks:
  
