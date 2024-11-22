@@ -41,7 +41,7 @@
       state: latest
     when: ansible_distribution == "CentOS"
 
-  - name: cop default html file for site
+  - name: copy default html file for site
     tags: apache,ubuntu,httpd
     copy:
       src: default_site.html
