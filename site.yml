@@ -1,63 +1,82 @@
 ---
 
-- hosts: all
+# - hosts: all
+#   become: true
+#   tasks:
+
+#   - name: install updates (CentOS)
+#     tags: always
+#     dnf:
+#       update_only: yes
+#       update_cache: yes
+#     when: ansible_distribution == "CentOS"
+
+#   - name: install updates (Ubuntu)
+#     tags: always
+#     apt:
+#       upgrade: dist
+#       update_cache: yes
+#     when: ansible_distribution == "Ubuntu"
+
+- hosts: workstations
   become: true
   tasks:
 
-  - name: install updates (CentOS)
-    tags: always
-    dnf:
-      update_only: yes
-      update_cache: yes
-    when: ansible_distribution == "CentOS"
+    - name: install unzip
+      tags: workstation
+      package:
+        name: unzip
 
-  - name: install updates (Ubuntu)
-    tags: always
-    apt:
-      upgrade: dist
-      update_cache: yes
-    when: ansible_distribution == "Ubuntu"
+    - name: install terraform
+      tags: workstation
+      ansible.builtin.unarchive:
+        src: https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: 0755
+        owner: root
+        group: root
 
+
+# - hosts: test_servers
+#   become: true
+#   tasks:
  
-- hosts: test_servers
-  become: true
-  tasks:
+#   - name: install apache and php for Ubuntu servers
+#     tags: apache,apache2,ubuntu
+#     apt:
+#       name:
+#         - apache2
+#         - libapache2-mod-php
+#       state: latest
+#     when: ansible_distribution == "Ubuntu"
  
-  - name: install apache and php for Ubuntu servers
-    tags: apache,apache2,ubuntu
-    apt:
-      name:
-        - apache2
-        - libapache2-mod-php
-      state: latest
-    when: ansible_distribution == "Ubuntu"
- 
-  - name: install apache and php for CentOS servers
-    tags: apache,centos,httpd
-    dnf:
-      name:
-        - httpd
-        - php
-      state: latest
-    when: ansible_distribution == "CentOS"
+#   - name: install apache and php for CentOS servers
+#     tags: apache,centos,httpd
+#     dnf:
+#       name:
+#         - httpd
+#         - php
+#       state: latest
+#     when: ansible_distribution == "CentOS"
 
-  - name: copy default html file for site
-    tags: apache,ubuntu,httpd
-    copy:
-      src: default_site.html
-      dest: /var/www/html/index.html
-      owner: root
-      group: root
-      mode: 0644
+#   - name: cop default html file for site
+#     tags: apache,ubuntu,httpd
+#     copy:
+#       src: default_site.html
+#       dest: /var/www/html/index.html
+#       owner: root
+#       group: root
+#       mode: 0644
 
-- hosts: db_servers
-  become: true
-  tasks:
+# - hosts: db_servers
+#   become: true
+#   tasks:
 
-    - name: instal mariadb package (Ubuntu)
-      tags: db,mariadb,ubuntu
-      apt:
-        name: mariadb-server
-        state: latest
-      when: ansible_distribution == "Ubuntu"
+#     - name: instal mariadb package (Ubuntu)
+#       tags: db,mariadb,ubuntu
+#       apt:
+#         name: mariadb-server
+#         state: latest
+#       when: ansible_distribution == "Ubuntu"
 
