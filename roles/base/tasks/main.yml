@@ -1,0 +1,4 @@
+- name: add ssh key for nate
+  authorized_key:
+    user: noghan
+    key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILJfERCT9RNoWxnfr6FVXv4S1+ZFTIuP3zUS9/DgrPw9 noghan@ip-172-31-83-51"

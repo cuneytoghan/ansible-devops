@@ -1,0 +1,19 @@
+- name: install unzip
+  tags: workstation
+  package:
+    name: unzip
+
+- name: install terraform
+  tags: workstation
+  ansible.builtin.unarchive:
+    src: https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip
+    dest: /usr/local/bin
+    remote_src: yes
+    mode: 0755
+    owner: root
+    group: root
+- name: install docker
+  tags: workstations
+  ansible.builtin.apt:
+    name: docker.io
+    state: present
