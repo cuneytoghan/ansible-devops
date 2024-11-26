@@ -1,0 +1,21 @@
+---
+# tasks file for httpd
+- name: Install apache httpd
+  ansible.builtin.apt:
+    name: apache2
+    state: present
+    update_cache: yes
+- name: Copy file with owner and permissions
+  ansible.builtin.copy:
+    src: files/index.html
+    dest: /var/www/html
+    owner: root
+    group: root
+    mode: '0644'
+- name: print a variable by using debug
+  ansible.builtin.debug:
+    msg: this is test message for {{ test_variable }}
+  register: debug_output
+
+- debug:
+    var: print "{{ debug_output }}"

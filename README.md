@@ -32,3 +32,7 @@ To exit
 ```bash
 deactivate
 ```
+## Execute Roles in playbook
+```bash
+ansible-playbook site.yaml
+```

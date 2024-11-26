@@ -22,6 +22,7 @@
         instance_ids:
           - i-03dd617ca2fef186b  # Replace with your actual instance ID (manageed-node-1)
           - i-0be4c3e7246e03419  # Replace with your actual instance ID (manageed-node-3)
+          - i-0bec1ba91282dde95  # Replace with your actual instance ID (ansible-workstation)
         region: us-east-1        # Replace with your AWS region
         aws_access_key: "{{ aws_access_key }}"
         aws_secret_key: "{{ aws_secret_key }}"

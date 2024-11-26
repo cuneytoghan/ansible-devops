@@ -1,0 +1,4 @@
+---
+# defaults file for httpd
+
+test_variable: "This is a test variable"

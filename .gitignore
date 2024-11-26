@@ -1,4 +1,6 @@
 workstation
-roles/
 vault.pass
 venv/
+geerlingguy.mysql/
+geerlingguy.apache/
+bsmeding.docker/

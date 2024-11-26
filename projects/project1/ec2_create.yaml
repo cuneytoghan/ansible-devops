@@ -16,5 +16,6 @@
       image_id: "{{ item.image }}"
 
     loop:
+      - { image: "ami-0866a3c8686eaeeba", name: "workstation" } # centos images
       - { image: "ami-0866a3c8686eaeeba", name: "my-instance-2" } # ubuntu images
       - { image: "ami-0866a3c8686eaeeba", name: "my-instance-3" } # ubuntu images

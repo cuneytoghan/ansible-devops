@@ -2,62 +2,43 @@
 
 - hosts: all
   become: true
-  tasks:
+  pre_tasks:
 
-  - name: install updates (CentOS)
+  - name: update repository index (CentOS)
     tags: always
     dnf:
-      update_only: yes
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "CentOS"
 
-  - name: install updates (Ubuntu)
+  - name: update repository index (Ubuntu)
     tags: always
     apt:
-      upgrade: dist
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "Ubuntu"
 
- 
-- hosts: web_servers
+- hosts: all
   become: true
-  tasks:
- 
-  - name: install apache and php for Ubuntu servers
-    tags: apache,apache2,ubuntu
-    apt:
-      name:
-        - apache2
-        - libapache2-mod-php
-      state: latest
-    when: ansible_distribution == "Ubuntu"
- 
-  - name: install apache and php for CentOS servers
-    tags: apache,centos,httpd
-    dnf:
-      name:
-        - httpd
-        - php
-      state: latest
-    when: ansible_distribution == "CentOS"
-
-  - name: cop default html file for site
-    tags: apache,ubuntu,httpd
-    copy:
-      src: default_site.html
-      dest: /var/www/html/index.html
-      owner: root
-      group: root
-      mode: 0644
-
-- hosts: db_servers
+  roles:
+    - base
+  
+- hosts: workstations
   become: true
-  tasks:
+  roles:
+    - workstations
 
-    - name: instal mariadb package (Ubuntu)
-      tags: db,mariadb,ubuntu
-      apt:
-        name: mariadb-server
-        state: latest
-      when: ansible_distribution == "Ubuntu"
+- hosts: test_servers
+  become: true
+  roles:
+    - test_servers
 
+# - hosts: db_servers
+#   become: true
+#   roles:
+#     - db_servers
+
+# - hosts: file_servers
+#   become: true
+#   roles:
+  # - file_servers
