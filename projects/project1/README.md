@@ -84,13 +84,19 @@ ssh -o ' IdentityFile PATH/TO/KEYPAIR' 'ubuntu@<IP-address>'
 1. To run playbooks and create/stop/start/terminate ec2 instances: 
 ```bash
 cd projects/project
-
+```
+```bash
 ansible-playbook  -i inventory.ini  ec2_create.yaml --vault-pass-file vault.pass   
-
+```
+```bash
 ansible-playbook  -i inventory.ini  ec2_stop.yaml --vault-pass-file vault.pass  
-
+```
+```bash
 ansible-playbook  -i inventory.ini  ec2_start.yaml --vault-pass-file vault.pass   
+```
 
+
+```bash
 ansible-playbook  -i inventory.ini  ec2_terminate.yaml --vault-pass-file vault.pass   
 ```
 
