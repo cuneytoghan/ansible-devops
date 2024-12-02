@@ -5,7 +5,12 @@
       - "{{ apache_package_name }}"
       - "{{ php_package_name }}"
     state: latest
-
+- name: start apache service
+  tags: apache,apache2,ubuntu
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: true
 # - name: install apache on Ubuntu servers
 #   tags: apache,apache2,ubuntu
 #   apt:
