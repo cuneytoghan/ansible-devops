@@ -2,7 +2,7 @@
 # tasks file for httpd
 - name: Install apache httpd
   ansible.builtin.apt:
-    name: apache2
+    name: "{{ apache_package_name }}"
     state: present
     update_cache: yes
 - name: Copy file with owner and permissions
